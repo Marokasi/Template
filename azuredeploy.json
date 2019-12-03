@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {},
+  "variables": {
+    "mp-vnetPrefix": "10.0.0.0/16",
+    "mp-vnetSubnet1Name": "Dev-01",
+    "mp-vnetSubnet1Prefix": "10.0.1.0/24",
+    "mp-vnetSubnet2Name": "Dev-02",
+    "mp-vnetSubnet2Prefix": "10.0.2.0/24"},
+  "resources": [
+    {
+      "name": "mp-vnet",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "mp-vnet"
+      },
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[variables('mp-vnetPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('mp-vnetSubnet1Name')]",
+            "properties": {
+              "addressPrefix": "[variables('mp-vnetSubnet1Prefix')]"
+            }
+          },
+          {
+            "name": "[variables('mp-vnetSubnet2Name')]",
+            "properties": {
+              "addressPrefix": "[variables('mp-vnetSubnet2Prefix')]"
+            }
+          }
+        ]
+      }
+    }],
+  "outputs": {}
+
+}
